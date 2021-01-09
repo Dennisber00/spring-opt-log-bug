@@ -1,0 +1,29 @@
+### new entity manager and session creation for REST REQUEST
+class: OpenEntityManagerInViewInterceptor
+package: org.springframework.orm.jpa.support
+line 88: EntityManager em = createEntityManager();
+
+### Transaction Creation:
+class: TransactionAspectSupport
+package: org.springframework.transaction.interceptor
+line 595: status = tm.getTransaction(txAttr);
+
+### Session Creation:
+class: SessionFactoryImpl
+package: org.hibernate.internal;
+line 607: final Session session = builder.openSession();
+
+### Entity State:
+class: DefaultMergeEventListener
+package: org.hibernate.event.internal
+line 170: switch ( entityState ) {
+
+### Entity Version Validation (Detached)
+class: DefaultMergeEventListener
+package: org.hibernate.event.internal
+line 336: else if ( isVersionChanged( entity, source, persister, target ) ) {
+
+### Hibernate LVL 1 Cache add entity
+class: StatefulPersistenceContext
+package: org.hibernate.engine.internal
+line 397: entitiesByKey.put( key, entity );
